@@ -1,13 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@font-face {
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700&display=swap'); */
+/* @font-face {
     font-family: "poppins";
     src: url("Poppins/Poppins-Regular.ttf");
-}
+} */
 *{
-    font-family: "poppins";
+    font-family: 'Poppins', sans-serif;
 }
 body{
     background-color: #f3f3eb;
