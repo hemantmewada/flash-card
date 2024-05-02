@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+// console.log(JSON.parse(localStorage.getItem("fsdfds ")));
 const initialState = {
   // cards: JSON.parse(localStorage.getItem("cards")) ?? [],
-  cards: [],
+  cards: localStorage.getItem("cards")
+    ? JSON.parse(localStorage.getItem("cards"))
+    : [],
+  // cards: [],
 };
 const todosSlice = createSlice({
   name: "todos",

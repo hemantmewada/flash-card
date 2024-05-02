@@ -52,7 +52,7 @@ const FlashCard = (props) => {
               : props.groupDescription}
           </span>
           <p className="mt-4 text-sm text-gray-500">
-            {props.terms.length} Cards
+            {props.terms.length} T&C's
           </p>
           <button
             onClick={navigateToDetailPage}

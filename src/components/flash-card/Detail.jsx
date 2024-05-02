@@ -122,7 +122,7 @@ const Detail = () => {
                 <div className="w-full bg-white border border-gray-200 rounded-lg shadow ">
                   <div className="flex flex-col p-5">
                     <p className="text-gray-500 text-sm mb-2">
-                      Flashcards (terms)
+                      Term & Conditions
                     </p>
                     <div className="w-full h-[2px] bg-gray-300 mb-2"></div>
                     {card?.terms.map((term, index) => {
