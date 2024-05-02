@@ -131,18 +131,36 @@ const AddTermsAndConditions = ({
                       </div>
                     </div>
                   ) : (
-                    <>
-                      <input
-                        className="absolute pt-[13px] opacity-0 file1"
-                        type="file"
-                        onChange={(e) => {
-                          handleChangeFile(e, index);
-                        }}
-                      />
-                      <button className="border border-[#2342e8] text-[#2342e8] rounded w-full py-[10px] mt-1">
-                        <span className="">Select Image</span>
-                      </button>
-                    </>
+                    <div className="flex flex-row gap-5 justify-between">
+                      <div className="flex gap-2 flex-grow h-12">
+                        <button className="border border-[#2342e8] text-[#2342e8] rounded w-full py-[10px] mt-1">
+                          <input
+                            className="absolute pt-[13px] opacity-0 block w-[175px] h-[42px] mt-[-10px] file1"
+                            type="file"
+                            onChange={(e) => {
+                              handleChangeFile(e, index);
+                            }}
+                          />
+                          <span className="">Select Image</span>
+                        </button>
+                      </div>
+                      <div className="gap-3 flex flex-col">
+                        <LuTrash2
+                          onClick={() => remove(index)}
+                          className="cursor-pointer"
+                          size={"30"}
+                          color="#C5C9D5"
+                        />
+                        <div className="ml-1">
+                          <FaRegEdit
+                            onClick={() => focusInput(index)}
+                            className="cursor-pointer"
+                            size={"30"}
+                            color="#C5C9D5"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   )}
                 </div>
               </div>
