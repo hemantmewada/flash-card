@@ -145,9 +145,9 @@ const CreateFlashCard = () => {
               document.getElementById("file").value = null;
               setValues({ ...values, groupImage: "" });
             };
-            useEffect(() => {
-              console.log(values);
-            }, [values]);
+            // useEffect(() => {
+            //   console.log(values);
+            // }, [values]);
 
             return (
               <form onSubmit={handleSubmit}>
