@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Tabs from "../components/Tabs";
 import CreateGroupCard from "../components/CreateGroupCard";
@@ -31,7 +31,7 @@ const CreateFlashCard = () => {
             const errors = {};
             if (!values.groupDescription) {
               errors.groupDescription = "Group Description is required";
-            } else if (values.groupDescription.length < 60) {
+            } else if (values.groupDescription.length < 25) {
               errors.groupDescription = "Group Description is too short.";
             }
             if (values.groupName == "") {
@@ -71,10 +71,10 @@ const CreateFlashCard = () => {
           }) => {
             const handleChangeGroupImage = (e) => {
               const reader = new FileReader();
-              reader.addEventListener("load", () => {
-                setValues({ ...values, groupImage: reader.result });
-              });
               reader.readAsDataURL(e.target.files[0]);
+              reader.onload = () => {
+                setValues({ ...values, groupImage: reader.result });
+              };
             };
 
             // change the input values for title and definition
@@ -107,21 +107,31 @@ const CreateFlashCard = () => {
             const remove = (index) => {
               let list = [...values.terms];
               if (list.length > 1) {
-                list.splice(index, 1);
-                // setTerms(list);
-                setValues({
-                  ...values,
-                  terms: list,
-                });
+                if (confirm("Are you sure do you want to delete?")) {
+                  list.splice(index, 1);
+                  setValues({
+                    ...values,
+                    terms: list,
+                  });
+                }
               } else {
                 toast.error("You can't remove all terms");
               }
             };
+            // remove the perticular image to the term
+            const removeTermImage = (index) => {
+              let list = [...values.terms];
+              list[index].image = "";
+              setValues({
+                ...values,
+                terms: list,
+              });
+            };
             // change function for the file only
             const handleChangeFile = (e, index) => {
               const reader = new FileReader();
-              reader.addEventListener("load", () => {
-                // console.log(reader.result);
+              reader.readAsDataURL(e.target.files[0]);
+              reader.onload = () => {
                 let list = [...values.terms];
                 list[index].image = reader.result;
                 // setTerms(list);
@@ -129,9 +139,16 @@ const CreateFlashCard = () => {
                   ...values,
                   terms: list,
                 });
-              });
-              reader.readAsDataURL(e.target.files[0]);
+              };
             };
+            const removeGroupImage = () => {
+              document.getElementById("file").value = null;
+              setValues({ ...values, groupImage: "" });
+            };
+            useEffect(() => {
+              console.log(values);
+            }, [values]);
+
             return (
               <form onSubmit={handleSubmit}>
                 <Tabs />
@@ -142,11 +159,13 @@ const CreateFlashCard = () => {
                   handleChangeGroupImage={handleChangeGroupImage}
                   handleChange={handleChange}
                   groupDescription={values.groupDescription}
+                  removeGroupImage={removeGroupImage}
                 />
                 <AddTermsAndConditions
                   terms={values.terms}
                   addMore={addMore}
                   remove={remove}
+                  removeTermImage={removeTermImage}
                   handleChangeTerm={handleChangeTerm}
                   handleChangeFile={handleChangeFile}
                   handleBlur={handleBlur}

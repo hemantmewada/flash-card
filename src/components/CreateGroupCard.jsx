@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { colors, groups } from "./../utils/index";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { ErrorMessage } from "formik";
+import { RxCross2 } from "react-icons/rx";
 
 const CreateGroupCard = ({
   handleBlur,
@@ -10,6 +11,7 @@ const CreateGroupCard = ({
   handleChangeGroupImage,
   groupDescription,
   handleChange,
+  removeGroupImage,
 }) => {
   return (
     <div className="pt-10">
@@ -64,13 +66,19 @@ const CreateGroupCard = ({
           </div>
           <div>
             {groupImage && (
-              <a href={groupImage} target="_blank">
+              <div className="relative">
                 <img
                   className="max-h-[250px]"
                   src={groupImage}
                   alt="group image"
                 />
-              </a>
+                <RxCross2
+                  onClick={removeGroupImage}
+                  size={"30"}
+                  color="#000"
+                  className="absolute top-0 left-[-36px] hover:rotate-90 duration-200 ease-in-out cursor-pointer"
+                />
+              </div>
             )}
           </div>
         </div>

@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { LuTrash2 } from "react-icons/lu";
 import { FaRegEdit } from "react-icons/fa";
+import { RxCross2 } from "react-icons/rx";
+
 const AddTermsAndConditions = ({
   terms,
   addMore,
   remove,
+  removeTermImage,
   handleChangeTerm,
   handleChangeFile,
   errors,
@@ -95,12 +98,21 @@ const AddTermsAndConditions = ({
               <div className="col-span-2 md:col-span-1">
                 <div className="pt-6">
                   {term.image ? (
-                    <div className="flex gap-2">
-                      <img
-                        src={term.image}
-                        alt="term image"
-                        className="w-3/5 rounded"
-                      />
+                    <div className="flex gap-2 ">
+                      <div className="relative">
+                        <img
+                          src={term.image}
+                          alt="term image"
+                          className="w-full rounded"
+                        />
+
+                        <RxCross2
+                          onClick={() => removeTermImage(index)}
+                          size={"30"}
+                          color="#000"
+                          className="p-1 absolute top-0 right-0 hover:rotate-90 duration-200 ease-in-out cursor-pointer bg-white rounded-tl-2xl rounded-bl-2xl rounded-br-2xl hover:rounded-tl-none hover:rounded-tr-2xl"
+                        />
+                      </div>
                       <div className="gap-3 flex flex-col">
                         <LuTrash2
                           onClick={() => remove(index)}
